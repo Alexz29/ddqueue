@@ -1,0 +1,21 @@
+{
+    "name": "alexz29/yii2-ddqueue",
+    "description": "Extension yii2 send information about queue to dataDog",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"," dataDog"," queue"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexz29",
+            "email": "alexz29@yandex.ru"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ddqueue\\": ""
+        }
+    }
+}
