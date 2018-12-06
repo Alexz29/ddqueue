@@ -1,4 +1,4 @@
-Yii2 DataDog Queue
+Yii2 DataDog Queue 
 ==================
 Extension yii2 send metrics about queue to dataDog
 
@@ -59,4 +59,19 @@ example your queue cfg:
            'class' => 'yii\queue\LogBehavior',
       ]
    ],
+```
+
+Cli command:
+
+```
+php yii ddqueue/data-dog/send
+```
+
+Result:
+```
+yii.queue.delayed sent
+yii.queue.waiting sent
+yii.queue.reserved sent
+yii.queue.done sent
+Done ...
 ```
