@@ -4,10 +4,10 @@ Extension yii2 send metrics about queue to dataDog
 
 Metrics:
 ```
-yii.{name of your Queue}.waiting
-yii.{name of your Queue}.delayed
-yii.{name of your Queue}.reserved
-yii.{name of your Queue}.done
+yii.queue.{name of your Queue}.waiting
+yii.queue.{name of your Queue}.delayed
+yii.queue.{name of your Queue}.reserved
+yii.queue.{name of your Queue}.done
 ```
 
 For current host.
@@ -75,9 +75,9 @@ php yii ddqueue/data-dog/send queueSingleThread
 
 Result:
 ```
-yii.queueSingleThread.delayed sent
-yii.queueSingleThread.waiting sent
-yii.queueSingleThread.reserved sent
-yii.queueSingleThread.done sent
+yii.queue.queueSingleThread.delayed sent
+yii.queue.queueSingleThread.waiting sent
+yii.queue.queueSingleThread.reserved sent
+yii.queue.queueSingleThread.done sent
 Done ...
 ```
