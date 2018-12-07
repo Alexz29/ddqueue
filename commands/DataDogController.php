@@ -49,17 +49,17 @@ class DataDogController extends \yii\console\Controller
 
         $this->info = new QueueInfo(new $this->module->dataProvider($queue));
 
-        $this->pushMetric("yii.$queueName.delayed", $this->info->provider->getDelayed());
-        $this->stdout("yii.$queueName.delayed sent" . "\n", Console::FG_GREEN);
+        $this->pushMetric("yii.queue.$queueName.delayed", $this->info->provider->getDelayed());
+        $this->stdout("yii.queue.$queueName.delayed sent" . "\n", Console::FG_GREEN);
 
-        $this->pushMetric("yii.$queueName.waiting", $this->info->provider->getWaiting());
-        $this->stdout("yii.$queueName.waiting sent" . "\n", Console::FG_GREEN);
+        $this->pushMetric("yii.queue.$queueName.waiting", $this->info->provider->getWaiting());
+        $this->stdout("yii.queue.$queueName.waiting sent" . "\n", Console::FG_GREEN);
 
-        $this->pushMetric("yii.$queueName.reserved", $this->info->provider->getReserved());
-        $this->stdout("yii.$queueName.reserved sent" . "\n", Console::FG_GREEN);
+        $this->pushMetric("yii.queue.$queueName.reserved", $this->info->provider->getReserved());
+        $this->stdout("yii.queue.$queueName.reserved sent" . "\n", Console::FG_GREEN);
 
-        $this->pushMetric("yii.$queueName.done", $this->info->provider->getDone());
-        $this->stdout("yii.$queueName.done sent" . "\n", Console::FG_GREEN);
+        $this->pushMetric("yii.queue.$queueName.done", $this->info->provider->getDone());
+        $this->stdout("yii.queue.$queueName.done sent" . "\n", Console::FG_GREEN);
         $this->stdout('Done ...' . "\n", Console::FG_CYAN);
     }
 
