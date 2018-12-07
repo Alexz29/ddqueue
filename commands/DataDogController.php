@@ -6,6 +6,7 @@ use Bayer\DataDogClient\Client;
 use Bayer\DataDogClient\Event;
 use Bayer\DataDogClient\Series\Metric;
 use ddqueue\components\QueueInfo;
+use yii\helpers\Console;
 use yii\helpers\Url;
 use Yii;
 
@@ -30,17 +31,36 @@ class DataDogController extends \yii\console\Controller
     {
         $this->host = gethostname();
         $this->client = new Client($this->module->ddApiKey);
-        $queue = Yii::$app->get($this->module->queue);
-        $this->info = new QueueInfo(new $this->module->dataProvider($queue));
     }
 
 
-    public function actionIndex()
+    public function actionSend($queueName = null)
     {
-        $this->pushMetric('yii.queue.delayed', $this->info->provider->getDelayed());
-        $this->pushMetric('yii.queue.waiting', $this->info->provider->getWaiting());
-        $this->pushMetric('yii.queue.reserved', $this->info->provider->getReserved());
-        $this->pushMetric('yii.queue.done', $this->info->provider->getDone());
+        if (!$queueName) {
+            $queueName = $this->module->queue;
+        }
+
+        try {
+            $queue = Yii::$app->get($queueName);
+        } catch (\Exception $e) {
+            $this->stdout($e->getMessage() . "\n", Console::FG_RED);
+            return false;
+        }
+
+        $this->info = new QueueInfo(new $this->module->dataProvider($queue));
+
+        $this->pushMetric("yii.$queueName.delayed", $this->info->provider->getDelayed());
+        $this->stdout("yii.$queueName.delayed sent" . "\n", Console::FG_GREEN);
+
+        $this->pushMetric("yii.$queueName.waiting", $this->info->provider->getWaiting());
+        $this->stdout("yii.$queueName.waiting sent" . "\n", Console::FG_GREEN);
+
+        $this->pushMetric("yii.$queueName.reserved", $this->info->provider->getReserved());
+        $this->stdout("yii.$queueName.reserved sent" . "\n", Console::FG_GREEN);
+
+        $this->pushMetric("yii.$queueName.done", $this->info->provider->getDone());
+        $this->stdout('yii.$queueName.done sent' . "\n", Console::FG_GREEN);
+        $this->stdout('Done ...' . "\n", Console::FG_CYAN);
     }
 
     protected function pushMetric($name, $value)

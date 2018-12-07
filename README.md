@@ -4,10 +4,10 @@ Extension yii2 send metrics about queue to dataDog
 
 Metrics:
 ```
-yii.queue.waiting
-yii.queue.delayed
-yii.queue.reserved
-yii.queue.done
+yii.{name of your Queue}.waiting
+yii.{name of your Queue}.delayed
+yii.{name of your Queue}.reserved
+yii.{name of your Queue}.done
 ```
 
 For current host.
@@ -44,7 +44,7 @@ add to config/console.php
     'class' => 'ddqueue\Module',
     'ddApiKey' => '{api_key}',  //your api key from dataDog
     'dataProvider'=> \ddqueue\providers\RedisProvider::class, // data provider class
-    'queue' => 'queueSingleThread'  //name of components yours queue
+    'queue' => 'queueSingleThread'  //name of components yours queue by default
  ],
 ```
 
@@ -63,15 +63,21 @@ example your queue cfg:
 
 Cli command:
 
+send information about queue from config 'queue' => 'queueSingleThread'
 ```
 php yii ddqueue/data-dog/send
 ```
 
+Also you can provide Queue from console example:
+```
+php yii ddqueue/data-dog/send queueSingleThread
+```
+
 Result:
 ```
-yii.queue.delayed sent
-yii.queue.waiting sent
-yii.queue.reserved sent
-yii.queue.done sent
+yii.queueSingleThread.delayed sent
+yii.queueSingleThread.waiting sent
+yii.queueSingleThread.reserved sent
+yii.$queueName.done sent
 Done ...
 ```
