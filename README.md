@@ -78,6 +78,6 @@ Result:
 yii.queueSingleThread.delayed sent
 yii.queueSingleThread.waiting sent
 yii.queueSingleThread.reserved sent
-yii.$queueName.done sent
+yii.queueSingleThread.done sent
 Done ...
 ```

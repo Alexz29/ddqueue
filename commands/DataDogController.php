@@ -59,7 +59,7 @@ class DataDogController extends \yii\console\Controller
         $this->stdout("yii.$queueName.reserved sent" . "\n", Console::FG_GREEN);
 
         $this->pushMetric("yii.$queueName.done", $this->info->provider->getDone());
-        $this->stdout('yii.$queueName.done sent' . "\n", Console::FG_GREEN);
+        $this->stdout("yii.$queueName.done sent" . "\n", Console::FG_GREEN);
         $this->stdout('Done ...' . "\n", Console::FG_CYAN);
     }
 
